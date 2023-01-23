@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube Segment Demo</title>
+</head>
+
+<style>
+    .mirrorX {
+        transform: scaleX(-1);
+    }
+    .row {
+        display: flex;
+        flex-direction: row;
+    }
+    .square {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+<body>
+    <video id="video" class="mirrorX"></video>
+    <div class="row">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+    <div class="row">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+    <div class="row">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+    <script src="../dist/index.js"></script>
+    <script type="module">
+        import { getVideo } from '../dist/index.js';
+
+        function onFacelets(facelets) {
+            const squares = document.querySelectorAll(".square");
+            for (let i = 0; i < 9; i++) {
+                const i3 = i * 3;
+                const r = facelets[i3];
+                const g = facelets[i3 + 1];
+                const b = facelets[i3 + 2];
+                console.log([r, g, b].join(","));
+
+                squares[i].style.backgroundColor = `rgb(${r},${g},${b})`;
+            }
+        }
+
+        getVideo(onFacelets);
+    </script>
+</body>
+
+</html>
